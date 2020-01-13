@@ -1,7 +1,7 @@
 import {withTheme} from 'emotion-theming';
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import {openIntegrationDetails} from 'app/actionCreators/modal';
 import {PanelItem} from 'app/components/panels';
@@ -166,13 +166,13 @@ type StatusProps = {
 
 const Status = styled(
   withTheme((props: StatusProps) => {
-    const {enabled, ...p} = props;
+    const {enabled, theme, ...p} = props;
     return (
       <StatusContainer>
         <CircleIndicator
           enabled={enabled}
           size={6}
-          color={enabled ? p.theme.success : p.theme.gray2}
+          color={enabled ? theme.success : theme.gray2}
         />
         <div {...p}>{enabled ? t('Installed') : t('Not Installed')}</div>
       </StatusContainer>
@@ -188,6 +188,11 @@ const Status = styled(
     font-weight: normal;
   }
   margin-right: ${space(0.75)};
+`;
+
+const StatusWrapper = styled('div')`
+  display: flex;
+  align-items: center;
 `;
 
 const NewInstallation = styled('div')`
